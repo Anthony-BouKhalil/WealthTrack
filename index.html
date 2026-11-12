@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Explore portfolio growth and your path to financial independence with WealthTrack."
+    />
+    <title>WealthTrack — Wealth projection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="WealthTrack home">
+          <span class="brand-mark" aria-hidden="true">↗</span>
+          WealthTrack
+        </a>
+        <div class="topbar-right">
+          <span class="privacy"><span class="privacy-dot"></span>Your data stays in this browser</span>
+          <button class="button button-quiet" id="resetButton" type="button">Reset assumptions</button>
+        </div>
+      </header>
+
+      <main>
+        <section class="intro">
+          <div>
+            <p class="eyebrow">YOUR FINANCIAL FUTURE, IN FOCUS</p>
+            <h1>Make your money<br /><span>work toward more.</span></h1>
+            <p class="intro-copy">A clear, flexible view of your long-term wealth journey.</p>
+          </div>
+          <aside class="intro-note">
+            <span class="note-icon" aria-hidden="true">◎</span>
+            <div>
+              <strong>Built for exploration</strong>
+              <p>Adjust your assumptions and see what changes.</p>
+            </div>
+          </aside>
+        </section>
+
+        <div class="dashboard-grid">
+          <form id="projectionForm" class="panel inputs-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">YOUR ASSUMPTIONS</p>
+                <h2>Projection inputs</h2>
+              </div>
+              <span class="edit-icon" aria-hidden="true">⌁</span>
+            </div>
+
+            <div class="field">
+              <label for="currency">Display currency</label>
+              <select id="currency" name="currency">
+                <option value="CAD">Canadian dollar (CAD)</option>
+                <option value="USD">US dollar (USD)</option>
+                <option value="EUR">Euro (EUR)</option>
+                <option value="GBP">British pound (GBP)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="startingBalance">Starting portfolio</label>
+              <div class="input-wrap"><span class="input-prefix" id="currencyPrefix">CA$</span><input id="startingBalance" name="startingBalance" type="number" min="0" step="1000" value="25000" /></div>
+            </div>
+            <div class="field">
+              <label for="monthlyContribution">Monthly contribution</label>
+              <div class="input-wrap"><span class="input-prefix" id="currencyPrefix2">CA$</span><input id="monthlyContribution" name="monthlyContribution" type="number" min="0" step="50" value="1500" /></div>
+            </div>
+            <div class="field">
+              <div class="label-line"><label for="annualReturn">Annual return</label><output id="returnOutput" for="annualReturn">7.0%</output></div>
+              <input class="range" id="annualReturn" name="annualReturn" type="range" min="0" max="15" step="0.1" value="7" />
+              <div class="range-labels"><span>0%</span><span>15%</span></div>
+            </div>
+            <div class="field">
+              <div class="label-line"><label for="years">Time horizon</label><output id="yearsOutput" for="years">20 years</output></div>
+              <input class="range" id="years" name="years" type="range" min="1" max="50" step="1" value="20" />
+              <div class="range-labels"><span>1 year</span><span>50 years</span></div>
+            </div>
+
+            <div class="section-divider"></div>
+            <p class="eyebrow">PLAN FOR YOUR GOALS</p>
+            <div class="field">
+              <div class="label-line"><label for="inflation">Annual inflation</label><output id="inflationOutput" for="inflation">2.0%</output></div>
+              <input class="range" id="inflation" name="inflation" type="range" min="0" max="10" step="0.1" value="2" />
+              <div class="range-labels"><span>0%</span><span>10%</span></div>
+            </div>
+            <div class="field">
+              <label for="contributionIncrease">Annual contribution increase</label>
+              <div class="input-wrap"><input id="contributionIncrease" name="contributionIncrease" type="number" min="0" max="0.5" step="0.01" value="0.03" /><span class="input-suffix">decimal</span></div>
+              <p class="small-help">For 3%, enter 0.03.</p>
+            </div>
+            <div class="field">
+              <label for="currentAge">Current age</label>
+              <input class="plain-input" id="currentAge" name="currentAge" type="number" min="0" max="120" step="1" value="25" />
+            </div>
+            <div class="field">
+              <label for="annualSpending">Desired annual retirement spending</label>
+              <div class="input-wrap"><span class="input-prefix" id="currencyPrefix3">CA$</span><input id="annualSpending" name="annualSpending" type="number" min="0" step="1000" value="50000" /></div>
+            </div>
+            <div class="field">
+              <div class="label-line"><label for="withdrawalRate">Withdrawal rate</label><output id="withdrawalOutput" for="withdrawalRate">4.0%</output></div>
+              <input class="range" id="withdrawalRate" name="withdrawalRate" type="range" min="1" max="10" step="0.1" value="4" />
+              <div class="range-labels"><span>1%</span><span>10%</span></div>
+            </div>
+            <button class="button button-primary button-full" type="submit">Update projection <span aria-hidden="true">→</span></button>
+            <p class="form-footnote">Changes update your projection automatically.</p>
+          </form>
+
+          <div class="results-column">
+            <section class="metric-grid" aria-label="Portfolio projection summary">
+              <article class="metric-card metric-primary">
+                <div class="metric-top"><span>Projected portfolio</span><span class="metric-symbol">↗</span></div>
+                <strong class="metric-value" id="futureValue">—</strong>
+                <p id="futureValueCaption">At the end of your horizon</p>
+              </article>
+              <article class="metric-card">
+                <div class="metric-top"><span>Total contributions</span><span class="metric-symbol">＋</span></div>
+                <strong class="metric-value" id="contributionsValue">—</strong>
+                <p>Starting balance + deposits</p>
+              </article>
+              <article class="metric-card">
+                <div class="metric-top"><span>Investment growth</span><span class="metric-symbol">⌁</span></div>
+                <strong class="metric-value" id="growthValue">—</strong>
+                <p>Illustrative portfolio growth</p>
+              </article>
+            </section>
+
+            <section class="panel chart-panel">
+              <div class="panel-heading chart-heading">
+                <div><p class="eyebrow">GROWTH OVER TIME</p><h2>Portfolio projection</h2></div>
+                <div class="chart-legend"><span><i class="legend-dot legend-total"></i>Portfolio value</span><span><i class="legend-dot legend-deposits"></i>Contributions</span></div>
+              </div>
+              <div class="chart-wrap"><canvas id="wealthChart" aria-label="Projected portfolio and contributions over time" role="img"></canvas></div>
+              <div class="chart-bottom"><span>Today</span><span id="chartEndLabel">Year 20</span></div>
+            </section>
+
+            <section class="panel fi-panel">
+              <div class="panel-heading">
+                <div><p class="eyebrow">YOUR LONG-TERM GOAL</p><h2>Financial independence</h2></div>
+                <span class="fi-icon" aria-hidden="true">◎</span>
+              </div>
+              <div class="fi-summary">
+                <div><span class="sub-label">Estimated FI target</span><strong id="fiNumber">—</strong><p>Based on your spending and withdrawal rate</p></div>
+                <div><span class="sub-label">Illustrative income at projection end</span><strong id="annualIncome">—</strong><p>Per year at your selected withdrawal rate</p></div>
+              </div>
+              <div class="progress-label"><span>Starting portfolio progress</span><strong id="fiProgressLabel">0.0%</strong></div>
+              <div class="progress-track"><div class="progress-fill" id="fiProgressBar"></div></div>
+              <p class="small-help" id="fiProgressCaption">—</p>
+              <div class="fi-stats">
+                <div><span class="sub-label">Estimated time to FI</span><strong id="yearsToFi">—</strong><small>Based on current assumptions</small></div>
+                <div><span class="sub-label">Illustrative FI age</span><strong id="fiAge">—</strong><small>Estimate, not a guarantee</small></div>
+                <div><span class="sub-label">Monthly income at projection end</span><strong id="monthlyIncome">—</strong><small>Illustrative withdrawal</small></div>
+              </div>
+            </section>
+
+            <div class="lower-grid">
+              <section class="breakdown-panel">
+                <p class="eyebrow">PORTFOLIO MIX</p><h2>Where it comes from</h2>
+                <div class="breakdown-visual">
+                  <div class="donut" id="breakdownDonut"><div><strong id="growthShare">0%</strong><span>growth</span></div></div>
+                  <div class="breakdown-legend">
+                    <div><i class="legend-dot legend-deposits"></i><span>Contributions</span><strong id="breakdownContributions">—</strong></div>
+                    <div><i class="legend-dot legend-total"></i><span>Investment growth</span><strong id="breakdownGrowth">—</strong></div>
+                  </div>
+                </div>
+              </section>
+              <section class="real-value-panel">
+                <p class="eyebrow">TODAY'S DOLLARS</p><h2>Inflation-adjusted value</h2>
+                <strong class="real-value" id="realValue">—</strong>
+                <p>Estimated purchasing power of your projected portfolio after accounting for inflation.</p>
+                <div class="real-foot"><span>Inflation assumption</span><strong id="realInflation">2.0%</strong></div>
+              </section>
+            </div>
+
+            <section class="panel scenarios-panel">
+              <div class="panel-heading"><div><p class="eyebrow">A RANGE OF OUTCOMES</p><h2>Return scenarios</h2></div><span class="scenario-tag">Illustrative only</span></div>
+              <p class="scenario-intro">Compare how different average annual returns could affect your projected portfolio.</p>
+              <div class="scenario-grid" id="scenarioGrid"></div>
+            </section>
+            <p class="disclaimer">This educational illustration is not financial advice, a forecast, or a guarantee. Actual investment returns vary. Taxes, fees, withdrawals before FI, volatility, and sequence-of-returns risk are not modeled.</p>
+          </div>
+        </div>
+      </main>
+      <footer><span>WEALTHTRACK</span><span>Your assumptions are saved in this browser only.</span></footer>
+    </div>
+  </body>
+</html>

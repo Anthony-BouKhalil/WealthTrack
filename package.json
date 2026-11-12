@@ -1,0 +1,17 @@
+{
+  "name": "wealthtrack",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A browser-based wealth projection and financial independence dashboard.",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "npm run typecheck && esbuild src/app.ts --bundle --format=iife --target=es2020 --outfile=dist/app.js && cp index.html dist/index.html && mkdir -p dist/assets && cp assets/styles.css dist/assets/styles.css"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.7"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "typescript": "^5.7.2"
+  }
+}
